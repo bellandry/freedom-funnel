@@ -15,22 +15,21 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://freedom-digital.fr"),
-  title:
-    "Diane Carole | Freedom Digital - L'Architecture de votre Liberté Financière",
+  title: "Diane | Freedom Digital - L'Architecture de votre Liberté Financière",
   description:
-    "Découvrez le modèle Freedom Digital avec Diane Carole. Un cadre stratégique pour bâtir une liberté financière durable, sans pression commerciale et accessible à tous.",
+    "Découvrez le modèle Freedom Digital avec Diane . Un cadre stratégique pour bâtir une liberté financière durable, sans pression commerciale et accessible à tous.",
   keywords: [
     "liberté financière",
     "indépendance financière",
     "travail à domicile",
     "modèle digital",
-    "Diane Carole",
+    "Diane ",
     "revenus passifs",
     "entrepreneuriat",
   ],
-  authors: [{ name: "Diane Carole" }],
+  authors: [{ name: "Laclass Dev" }],
   openGraph: {
-    title: "Diane Carole | Freedom Digital",
+    title: "Diane  | Freedom Digital",
     description:
       "Bâtissez votre liberté financière avec un modèle digital simple et puissant.",
     url: "https://freedom-digital.fr", // À adapter selon le domaine réel
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
         url: "/og-image.png", // Image à créer ou placeholder
         width: 1200,
         height: 630,
-        alt: "Freedom Digital - Diane Carole",
+        alt: "Freedom Digital - Diane ",
       },
     ],
     locale: "fr_FR",
@@ -48,7 +47,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Diane Carole | Freedom Digital",
+    title: "Diane  | Freedom Digital",
     description:
       "Bâtissez votre liberté financière avec un modèle digital simple et puissant.",
     images: ["/og-image.png"],
@@ -72,14 +71,14 @@ export default function RootLayout({
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "Person",
-              name: "Diane Carole",
+              name: "Diane ",
               url: "https://freedom-digital.fr",
               jobTitle: "High Ticket Closer & Digital Mentor",
               description:
                 "Accompagne les personnes vers la liberté financière grâce à un modèle digital stratégique.",
               sameAs: [
-                "https://www.linkedin.com/in/dianecarole", // Exemples à adapter
-                "https://www.instagram.com/dianecarole",
+                "https://www.linkedin.com/in/diane", // Exemples à adapter
+                "https://www.instagram.com/diane",
               ],
             }),
           }}

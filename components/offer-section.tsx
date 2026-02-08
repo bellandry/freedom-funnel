@@ -17,7 +17,7 @@ export const Offer: React.FC<SectionProps> = ({ onCTA }) => {
                 width={400}
                 height={400}
                 className="relative w-full aspect-4xl object-cover rounded-2xl grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
-                alt="Diane Carole"
+                alt="Diane "
               />
               <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
             </div>

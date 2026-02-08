@@ -13,10 +13,10 @@ export const Footer: React.FC = () => (
         </div>
         <div className="text-center md:text-right">
           <p className="text-gold font-bold text-2xl mb-4 italic tracking-widest font-serif-luxury">
-            Diane Carole
+            Diane
           </p>
           <div className="font-serif-luxury italic text-5xl text-white/5 select-none pointer-events-none">
-            Diane Carole
+            Diane
           </div>
         </div>
       </div>

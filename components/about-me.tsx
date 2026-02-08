@@ -15,7 +15,7 @@ export const AboutMe: React.FC<SectionProps> = ({ onCTA }) => {
               L&apos;Histoire Derrière le Modèle
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 font-serif-luxury leading-tight">
-              Je suis Diane Carole. <br />
+              Je suis Diane . <br />
               <span className="text-gold italic">
                 J&apos;ai été l&apos;esclave du système.
               </span>
@@ -74,13 +74,13 @@ export const AboutMe: React.FC<SectionProps> = ({ onCTA }) => {
                   width={400}
                   height={400}
                   className="relative w-full aspect-quare object-cover rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-1000"
-                  alt="Diane Carole"
+                  alt="Diane "
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
               </motion.div>
               <div className="absolute -bottom-6 -right-6 p-8 bg-slate-900 text-white rounded-2xl shadow-2xl z-20 border border-gold/30 transform group-hover:-translate-x-2 group-hover:-translate-y-2 transition-transform duration-500">
                 <p className="font-bold text-gold text-xl italic tracking-widest uppercase font-serif-luxury">
-                  DIANE CAROLE
+                  DIANE
                 </p>
                 <p className="text-[10px] text-slate-400 font-bold uppercase tracking-[0.3em]">
                   Architecte de Liberté
