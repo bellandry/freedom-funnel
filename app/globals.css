@@ -19,8 +19,118 @@
   }
 }
 
-body {
+/* body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+} */
+
+body {
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+  background-color: #fffdf9;
+  overflow-x: hidden;
+}
+.font-serif-luxury {
+  font-family: "Playfair Display", serif;
+}
+.text-gold {
+  color: #c5a028;
+}
+.bg-gold {
+  background-color: #c5a028;
+}
+.text-gradient-gold {
+  background: linear-gradient(to right, #c5a028, #e3c363, #b8860b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.bg-dark-gold-gradient {
+  background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 60%, #3d3311 100%);
+}
+.border-gold {
+  border-color: #c5a028;
+}
+.shadow-gold-glow {
+  box-shadow: 0 0 15px rgba(197, 160, 40, 0.1);
+}
+
+/* Animations */
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+@keyframes glint {
+  0% {
+    left: -100%;
+  }
+  20% {
+    left: 100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.animate-fade-up {
+  animation: fadeUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.cta-red {
+  background-color: #e11d48;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+.cta-red::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transform: skewX(-25deg);
+  animation: glint 4s infinite;
+}
+.cta-red:hover {
+  background-color: #be123c;
+  box-shadow: 0 15px 30px rgba(225, 29, 72, 0.3);
+  transform: translateY(-3px) scale(1.02);
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Playfair Display", serif;
 }
