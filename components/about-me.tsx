@@ -1,5 +1,6 @@
 "use client";
 
+import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Quote } from "lucide-react";
 import Image from "next/image";
 import { SectionProps } from "./hero-section";
@@ -63,16 +64,20 @@ export const AboutMe: React.FC<SectionProps> = ({ onCTA }) => {
           <div className="relative flex flex-col pt-12 gap-8">
             <div className="relative group">
               <div className="absolute -inset-10 bg-gold/5 rounded-full blur-3xl group-hover:bg-gold/10 transition-colors duration-700"></div>
-              <div className="relative overflow-hidden rounded-2xl">
+              <motion.div
+                className="relative overflow-hidden rounded-2xl"
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.5 }}
+              >
                 <Image
                   src="/ppdiane.png"
                   width={400}
                   height={400}
-                  className="relative w-full aspect-quare object-cover rounded-2xl grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-1000"
+                  className="relative w-full aspect-quare object-cover rounded-2xl grayscale group-hover:grayscale-0 transition-all duration-1000"
                   alt="Diane Carole"
                 />
                 <div className="absolute inset-0 bg-linear-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-              </div>
+              </motion.div>
               <div className="absolute -bottom-6 -right-6 p-8 bg-slate-900 text-white rounded-2xl shadow-2xl z-20 border border-gold/30 transform group-hover:-translate-x-2 group-hover:-translate-y-2 transition-transform duration-500">
                 <p className="font-bold text-gold text-xl italic tracking-widest uppercase font-serif-luxury">
                   DIANE CAROLE

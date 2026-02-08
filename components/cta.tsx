@@ -18,7 +18,7 @@ export const FinalCTA: React.FC<SectionProps> = ({ onCTA }) => {
           </p>
           <button
             onClick={onCTA}
-            className="cta-red text-white px-16 py-8 rounded-full font-bold text-2xl shadow-2xl flex items-center gap-4 mx-auto uppercase tracking-widest"
+            className="cta-red text-white px-8 md:px-16 py-6 md:py-8 rounded-full font-bold text-lg md:text-2xl shadow-2xl flex items-center gap-4 mx-auto uppercase tracking-widest"
           >
             DÉMARRER MAINTENANT
             <PhoneCall size={32} />

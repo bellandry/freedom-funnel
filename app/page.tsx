@@ -15,10 +15,12 @@ import { Process } from "@/components/process-section";
 import { TargetAudience } from "@/components/target-audience";
 import { Testimonials } from "@/components/testimonials-section";
 
+import { ScrollReveal } from "@/components/ui/scroll-reveal";
+
 export default function Home() {
   const PHONE_NUMBER = "33660989463";
   const PREFILLED_MESSAGE = encodeURIComponent(
-    "Bonjour Diane, j'ai vu votre présentation Freedom Digital et j'aimerais réserver mon appel gratuit de découverte. Je suis prêt à bâtir ma liberté financière durablement. Pouvons-nous en discuter ?"
+    "Bonjour Diane, j'ai vu votre présentation Freedom Digital et j'aimerais réserver mon appel gratuit de découverte. Je suis prêt à bâtir ma liberté financière durablement. Pouvons-nous en discuter ?",
   );
 
   const handleCTA = () => {
@@ -31,17 +33,51 @@ export default function Home() {
       <Navbar onCTA={handleCTA} />
       <main className="pt-20">
         <HeroSection onCTA={handleCTA} />
-        <Empathy onCTA={handleCTA} />
-        <Problem />
-        <Principles />
-        <Offer onCTA={handleCTA} />
-        <Benefits />
-        <TargetAudience />
-        <Objections onCTA={handleCTA} />
-        <Process />
-        <AboutMe onCTA={handleCTA} />
-        <Testimonials />
-        <FinalCTA onCTA={handleCTA} />
+
+        <ScrollReveal>
+          <Empathy onCTA={handleCTA} />
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
+          <Problem />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <Principles />
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.2}>
+          <Offer onCTA={handleCTA} />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <Benefits />
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
+          <TargetAudience />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <Objections onCTA={handleCTA} />
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.2}>
+          <Process />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <AboutMe onCTA={handleCTA} />
+        </ScrollReveal>
+
+        <ScrollReveal delay={0.1}>
+          <Testimonials />
+        </ScrollReveal>
+
+        <ScrollReveal>
+          <FinalCTA onCTA={handleCTA} />
+        </ScrollReveal>
+
         <Footer />
       </main>
     </div>
