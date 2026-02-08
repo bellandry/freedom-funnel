@@ -2,7 +2,6 @@
 
 import { incomeData } from "@/constants";
 import {
-  CartesianGrid,
   Line,
   LineChart,
   ResponsiveContainer,
@@ -12,8 +11,6 @@ import {
 } from "recharts";
 
 export const Problem: React.FC = () => {
-  const test = CartesianGrid;
-  const check = Tooltip;
   return (
     <section className="py-24 bg-[#FFFDF9]">
       <div className="container max-w-6xl mx-auto px-4">
@@ -52,12 +49,38 @@ export const Problem: React.FC = () => {
                     tick={{ fontSize: 10, fontWeight: 700 }}
                   />
                   <YAxis hide />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: "#0f172a",
+                      border: "1px solid #C5A028",
+                      borderRadius: "12px",
+                      boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.3)",
+                      color: "#fff",
+                      fontSize: "12px",
+                      padding: "12px",
+                    }}
+                    itemStyle={{ color: "#C5A028", fontWeight: "bold" }}
+                    labelStyle={{ marginBottom: "4px", color: "#94a3b8" }}
+                    cursor={{
+                      stroke: "#C5A028",
+                      strokeWidth: 1,
+                      strokeDasharray: "4 4",
+                    }}
+                    formatter={(value: any) => [`${value}€`, "Revenus Digital"]}
+                    labelFormatter={(label) => `Étape : ${label}`}
+                  />
                   <Line
                     type="monotone"
                     dataKey="digital"
                     stroke="#C5A028"
                     strokeWidth={4}
                     dot={{ fill: "#C5A028", strokeWidth: 2, r: 6 }}
+                    activeDot={{
+                      r: 8,
+                      stroke: "#fff",
+                      strokeWidth: 2,
+                      fill: "#C5A028",
+                    }}
                     animationDuration={2500}
                   />
                   <Line
