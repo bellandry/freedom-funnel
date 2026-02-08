@@ -40,8 +40,8 @@ export const Problem: React.FC = () => {
             <h3 className="text-center font-bold text-slate-400 mb-8 uppercase tracking-widest text-[10px]">
               Croissance exponentielle Freedom
             </h3>
-            <div className="h-72 w-full">
-              <ResponsiveContainer width="100%" height="100%">
+            <div className="h-72 w-full min-w-0">
+              <ResponsiveContainer width="100%" height="100%" minHeight={280}>
                 <LineChart data={incomeData}>
                   <XAxis
                     dataKey="name"
