@@ -1,3 +1,4 @@
+import { Question } from "@/types";
 import { Clock, Layers, ShieldCheck, TrendingUp, Zap } from "lucide-react";
 
 export const incomeData = [
@@ -73,5 +74,33 @@ export const principles = [
     title: "Actif Durable",
     text: "Construisez quelque chose qui travaille pour vous.",
     icon: TrendingUp,
+  },
+];
+
+export const QUESTIONS: Question[] = [
+  {
+    id: 1,
+    text: "Quelle est votre situation professionnelle actuelle ?",
+    options: ["Salariée", "Indépendante", "En recherche", "Autre"],
+  },
+  {
+    id: 2,
+    text: "Si votre revenu principal s’arrêtait demain, combien de temps pourriez-vous tenir ?",
+    options: ["Moins d’un mois", "1 à 3 mois", "3 à 6 mois", "Plus de 6 mois"],
+  },
+  {
+    id: 3,
+    text: "Quel est votre objectif de revenu mensuel supplémentaire ?",
+    options: ["500 à 1000 €", "1000 à 3000 €", "3000 € et plus"],
+  },
+  {
+    id: 4,
+    text: "Combien d’heures par semaine êtes-vous prête à consacrer à ce projet ?",
+    options: ["2–3h", "5–10h", "10h et plus"],
+  },
+  {
+    id: 5,
+    text: "Le démarrage nécessite un investissement initial de 149 $. Si votre profil correspond, êtes-vous prête à investir rapidement ?",
+    options: ["Oui", "J’ai besoin d’y réfléchir", "Non"],
   },
 ];

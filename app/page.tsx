@@ -4,6 +4,7 @@ import { AboutMe } from "@/components/about-me";
 import { Benefits } from "@/components/benefit-section";
 import { FinalCTA } from "@/components/cta";
 import { Empathy } from "@/components/empathy-section";
+import FilterForm from "@/components/filter-form";
 import { Footer } from "@/components/footer";
 import { HeroSection } from "@/components/hero-section";
 import { Navbar } from "@/components/navbar";
@@ -14,18 +15,20 @@ import { Problem } from "@/components/problem-section";
 import { Process } from "@/components/process-section";
 import { TargetAudience } from "@/components/target-audience";
 import { Testimonials } from "@/components/testimonials-section";
+import Modal from "@/components/ui/modal";
+import { useState } from "react";
 
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export default function Home() {
-  const PHONE_NUMBER = "33660989463";
-  const PREFILLED_MESSAGE = encodeURIComponent(
-    "Bonjour Diane, j'ai vu votre présentation Freedom Digital et j'aimerais réserver mon appel gratuit de découverte. Je suis prêt à bâtir ma liberté financière durablement. Pouvons-nous en discuter ?",
-  );
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleCTA = () => {
-    const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${PREFILLED_MESSAGE}`;
-    window.open(whatsappUrl, "_blank");
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
   };
 
   return (
@@ -80,6 +83,11 @@ export default function Home() {
 
         <Footer />
       </main>
+
+      {/* Modal avec le formulaire de filtrage */}
+      <Modal isOpen={isModalOpen} onClose={handleCloseModal}>
+        <FilterForm />
+      </Modal>
     </div>
   );
 }
