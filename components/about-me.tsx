@@ -22,7 +22,7 @@ export const AboutMe: React.FC<SectionProps> = ({ onCTA }) => {
             </h2>
             <div className="space-y-6 text-lg text-slate-600 font-light leading-relaxed">
               <p>
-                Pendant plus de 10 ans, j&apos;ai été{" "}
+                Pendant plusieurs années, j&apos;ai été{" "}
                 <span className="text-slate-900 font-bold italic">
                   infirmière
                 </span>

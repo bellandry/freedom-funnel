@@ -5,31 +5,85 @@ import { ChevronLeft, ChevronRight, MessageCircle } from "lucide-react";
 import { useState } from "react";
 
 export default function FilterForm() {
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentStep, setCurrentStep] = useState(0); // 0 = contact info, 1+ = questions
+  const [contactInfo, setContactInfo] = useState({
+    email: "",
+    phone: "",
+  });
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [errors, setErrors] = useState({ email: "", phone: "" });
 
-  const currentQuestion = QUESTIONS[currentQuestionIndex];
-  const isFirstQuestion = currentQuestionIndex === 0;
-  const isLastQuestion = currentQuestionIndex === QUESTIONS.length - 1;
-  const hasAnsweredCurrent = answers[currentQuestion.id] !== undefined;
+  const totalSteps = QUESTIONS.length + 1; // +1 pour l'étape des coordonnées
+  const currentQuestionIndex = currentStep - 1;
+  const currentQuestion =
+    currentStep > 0 ? QUESTIONS[currentQuestionIndex] : null;
+  const isContactStep = currentStep === 0;
+  const isFirstStep = currentStep === 0;
+  const isLastQuestion = currentStep === QUESTIONS.length;
+  const hasAnsweredCurrent = currentQuestion
+    ? answers[currentQuestion.id] !== undefined
+    : false;
+
+  // Vérifier si la réponse à la dernière question est "Non" (question 5)
+  const lastQuestionAnswer = answers[5];
+  const isQualified = lastQuestionAnswer !== "Non";
+
+  const validateEmail = (email: string) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePhone = (phone: string) => {
+    const phoneRegex = /^[\d\s+()-]{10,}$/;
+    return phoneRegex.test(phone);
+  };
+
+  const handleContactInfoChange = (field: "email" | "phone", value: string) => {
+    setContactInfo((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: "" }));
+  };
 
   const handleSelectOption = (option: string) => {
-    setAnswers((prev) => ({
-      ...prev,
-      [currentQuestion.id]: option,
-    }));
+    if (currentQuestion) {
+      setAnswers((prev) => ({
+        ...prev,
+        [currentQuestion.id]: option,
+      }));
+    }
   };
 
   const handleNext = () => {
-    if (currentQuestionIndex < QUESTIONS.length - 1) {
-      setCurrentQuestionIndex((prev) => prev + 1);
+    if (isContactStep) {
+      // Valider les informations de contact
+      const newErrors = { email: "", phone: "" };
+
+      if (!contactInfo.email) {
+        newErrors.email = "L'email est requis";
+      } else if (!validateEmail(contactInfo.email)) {
+        newErrors.email = "Email invalide";
+      }
+
+      if (!contactInfo.phone) {
+        newErrors.phone = "Le numéro de téléphone est requis";
+      } else if (!validatePhone(contactInfo.phone)) {
+        newErrors.phone = "Numéro de téléphone invalide";
+      }
+
+      if (newErrors.email || newErrors.phone) {
+        setErrors(newErrors);
+        return;
+      }
+    }
+
+    if (currentStep < totalSteps - 1) {
+      setCurrentStep((prev) => prev + 1);
     }
   };
 
   const handlePrevious = () => {
-    if (currentQuestionIndex > 0) {
-      setCurrentQuestionIndex((prev) => prev - 1);
+    if (currentStep > 0) {
+      setCurrentStep((prev) => prev - 1);
     }
   };
 
@@ -39,6 +93,7 @@ export default function FilterForm() {
     try {
       // Préparer les données pour l'API
       const formData = {
+        contactInfo,
         answers: QUESTIONS.map((q) => ({
           questionId: q.id,
           question: q.text,
@@ -64,7 +119,7 @@ export default function FilterForm() {
 
       const PHONE_NUMBER = "33660989463";
       const message = encodeURIComponent(
-        `Bonjour Diane, j'ai complété le questionnaire Freedom Digital. Voici mes réponses:\n\n${responsesSummary}\n\nJe suis prêt(e) à discuter de mon projet avec vous.`,
+        `Bonjour Diane, j'ai complété le questionnaire Freedom Digital.\n\nMes coordonnées:\n📧 Email: ${contactInfo.email}\n📱 Téléphone: ${contactInfo.phone}\n\nMes réponses:\n\n${responsesSummary}\n\nJe suis prêt(e) à discuter de mon projet avec vous.`,
       );
 
       // Redirection vers WhatsApp
@@ -80,7 +135,7 @@ export default function FilterForm() {
 
       const PHONE_NUMBER = "33660989463";
       const message = encodeURIComponent(
-        `Bonjour Diane, j'ai complété le questionnaire Freedom Digital. Voici mes réponses:\n\n${responsesSummary}\n\nJe suis prêt(e) à discuter de mon projet avec vous.`,
+        `Bonjour Diane, j'ai complété le questionnaire Freedom Digital.\n\nMes coordonnées:\n📧 Email: ${contactInfo.email}\n📱 Téléphone: ${contactInfo.phone}\n\nMes réponses:\n\n${responsesSummary}\n\nJe suis prêt(e) à discuter de mon projet avec vous.`,
       );
 
       const whatsappUrl = `https://wa.me/${PHONE_NUMBER}?text=${message}`;
@@ -89,6 +144,13 @@ export default function FilterForm() {
       setIsSubmitting(false);
     }
   };
+
+  const canProceed = isContactStep
+    ? contactInfo.email && contactInfo.phone && !errors.email && !errors.phone
+    : hasAnsweredCurrent;
+
+  // Pour la dernière question, vérifier aussi la qualification
+  const canSubmit = hasAnsweredCurrent && isQualified;
 
   return (
     <div className="w-full">
@@ -101,7 +163,9 @@ export default function FilterForm() {
           est fait pour vous
         </h2>
         <p className="text-slate-600 text-lg font-light">
-          Quelques questions pour mieux vous connaître
+          {isContactStep
+            ? "Commençons par vos coordonnées"
+            : "Quelques questions pour mieux vous connaître"}
         </p>
       </div>
 
@@ -109,61 +173,132 @@ export default function FilterForm() {
       <div className="mb-10">
         <div className="flex justify-between items-center mb-3">
           <span className="text-sm text-slate-600 font-medium">
-            Question {currentQuestionIndex + 1} sur {QUESTIONS.length}
+            {isContactStep
+              ? "Vos coordonnées"
+              : `Question ${currentQuestionIndex + 1} sur ${QUESTIONS.length}`}
           </span>
           <span className="text-sm text-gold font-bold">
-            {Math.round(((currentQuestionIndex + 1) / QUESTIONS.length) * 100)}%
+            {Math.round(((currentStep + 1) / totalSteps) * 100)}%
           </span>
         </div>
         <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden shadow-inner">
           <div
-            className="bg-gradient-to-r from-gold to-[#e3c363] h-3 rounded-full transition-all duration-500 shadow-gold-glow"
+            className="bg-linear-to-r from-gold to-[#e3c363] h-3 rounded-full transition-all duration-500 shadow-gold-glow"
             style={{
-              width: `${((currentQuestionIndex + 1) / QUESTIONS.length) * 100}%`,
+              width: `${((currentStep + 1) / totalSteps) * 100}%`,
             }}
           />
         </div>
       </div>
 
-      {/* Question */}
+      {/* Contenu dynamique */}
       <div className="mb-10">
-        <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 font-serif-luxury leading-tight">
-          {currentQuestion.text}
-        </h3>
+        {isContactStep ? (
+          // Étape des coordonnées
+          <div>
+            <div className="space-y-6">
+              {/* Email */}
+              <div>
+                <label
+                  htmlFor="email"
+                  className="block text-sm font-medium text-slate-700 mb-2"
+                >
+                  Adresse email <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  value={contactInfo.email}
+                  onChange={(e) =>
+                    handleContactInfoChange("email", e.target.value)
+                  }
+                  placeholder="votre@email.com"
+                  className={`w-full px-5 py-4 rounded-xl border-2 transition-all duration-300 text-lg ${
+                    errors.email
+                      ? "border-red-500 bg-red-50"
+                      : "border-slate-200 focus:border-gold focus:bg-slate-50"
+                  } outline-none`}
+                />
+                {errors.email && (
+                  <p className="mt-2 text-sm text-red-600">{errors.email}</p>
+                )}
+              </div>
 
-        {/* Options avec style luxueux */}
-        <div className="space-y-4">
-          {currentQuestion.options.map((option) => (
-            <button
-              key={option}
-              onClick={() => handleSelectOption(option)}
-              className={`w-full p-5 text-left rounded-xl border-2 transition-all duration-300 ${
-                answers[currentQuestion.id] === option
-                  ? "border-gold bg-gradient-to-r from-gold/10 to-[#e3c363]/10 shadow-gold-glow"
-                  : "border-slate-200 hover:border-gold/50 hover:bg-slate-50"
-              }`}
-            >
-              <span
-                className={`font-medium text-lg ${
-                  answers[currentQuestion.id] === option
-                    ? "text-slate-900"
-                    : "text-slate-700"
-                }`}
-              >
-                {option}
-              </span>
-            </button>
-          ))}
-        </div>
+              {/* Téléphone */}
+              <div>
+                <label
+                  htmlFor="phone"
+                  className="block text-sm font-medium text-slate-700 mb-2"
+                >
+                  Numéro de téléphone <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  id="phone"
+                  value={contactInfo.phone}
+                  onChange={(e) =>
+                    handleContactInfoChange("phone", e.target.value)
+                  }
+                  placeholder="+33 6 12 34 56 78"
+                  className={`w-full px-5 py-4 rounded-xl border-2 transition-all duration-300 text-lg ${
+                    errors.phone
+                      ? "border-red-500 bg-red-50"
+                      : "border-slate-200 focus:border-gold focus:bg-slate-50"
+                  } outline-none`}
+                />
+                {errors.phone && (
+                  <p className="mt-2 text-sm text-red-600">{errors.phone}</p>
+                )}
+              </div>
+
+              <p className="text-sm text-slate-500 italic">
+                🔒 Vos informations sont confidentielles et ne seront utilisées
+                que pour vous contacter.
+              </p>
+            </div>
+          </div>
+        ) : (
+          // Questions du questionnaire
+          <div>
+            <h3 className="text-2xl md:text-3xl font-bold text-slate-900 mb-8 font-serif-luxury leading-tight">
+              {currentQuestion?.text}
+            </h3>
+
+            {/* Options avec style luxueux */}
+            <div className="space-y-4">
+              {currentQuestion?.options.map((option) => (
+                <button
+                  key={option}
+                  onClick={() => handleSelectOption(option)}
+                  className={`w-full p-5 text-left rounded-xl border-2 transition-all duration-300 ${
+                    answers[currentQuestion.id] === option
+                      ? "border-gold bg-linear-to-r from-gold/10 to-[#e3c363]/10 shadow-gold-glow"
+                      : "border-slate-200 hover:border-gold/50 hover:bg-slate-50"
+                  }`}
+                >
+                  <span
+                    className={`font-medium text-lg ${
+                      answers[currentQuestion.id] === option
+                        ? "text-slate-900"
+                        : "text-slate-700"
+                    }`}
+                  >
+                    {option}
+                  </span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Navigation buttons avec style CTA */}
       <div className="flex justify-between items-center gap-4 pt-6 border-t border-slate-200">
         <button
           onClick={handlePrevious}
-          disabled={isFirstQuestion}
+          disabled={isFirstStep}
           className={`flex items-center gap-2 px-6 py-3 rounded-full font-bold transition-all duration-300 ${
-            isFirstQuestion
+            isFirstStep
               ? "opacity-40 cursor-not-allowed text-slate-400"
               : "text-slate-700 hover:bg-slate-100 border border-slate-300"
           }`}
@@ -175,9 +310,9 @@ export default function FilterForm() {
         {!isLastQuestion ? (
           <button
             onClick={handleNext}
-            disabled={!hasAnsweredCurrent}
+            disabled={!canProceed}
             className={`flex items-center gap-2 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 uppercase tracking-wider ${
-              !hasAnsweredCurrent
+              !canProceed
                 ? "opacity-40 cursor-not-allowed bg-slate-300 text-slate-500"
                 : "cta-red text-white shadow-xl"
             }`}
@@ -188,9 +323,9 @@ export default function FilterForm() {
         ) : (
           <button
             onClick={handleSubmit}
-            disabled={!hasAnsweredCurrent || isSubmitting}
+            disabled={!canSubmit || isSubmitting}
             className={`flex items-center gap-3 px-8 py-4 rounded-full font-bold text-lg transition-all duration-300 uppercase tracking-wider ${
-              !hasAnsweredCurrent || isSubmitting
+              !canSubmit || isSubmitting
                 ? "opacity-40 cursor-not-allowed bg-slate-300 text-slate-500"
                 : "cta-red text-white shadow-2xl"
             }`}
