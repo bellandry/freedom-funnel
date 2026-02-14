@@ -293,7 +293,7 @@ export default function FilterForm() {
       </div>
 
       {/* Navigation buttons avec style CTA */}
-      <div className="flex justify-between items-center gap-4 pt-6 border-t border-slate-200">
+      <div className="flex flex-wrap justify-between items-center gap-4 pt-6 border-t border-slate-200">
         <button
           onClick={handlePrevious}
           disabled={isFirstStep}
