@@ -17,7 +17,7 @@ export const AboutMe: React.FC<SectionProps> = ({ onCTA }) => {
             <h2 className="text-4xl md:text-5xl font-bold text-slate-900 font-serif-luxury leading-tight">
               Je suis Diane . <br />
               <span className="text-gold italic">
-                J&apos;ai été l&apos;esclave du système.
+                J&apos;ai été une victime du système.
               </span>
             </h2>
             <div className="space-y-6 text-lg text-slate-600 font-light leading-relaxed">
