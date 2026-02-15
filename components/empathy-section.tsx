@@ -1,9 +1,10 @@
 "use client";
 
 import { ArrowRight } from "lucide-react";
+import { memo } from "react";
 import { SectionProps } from "./hero-section";
 
-export const Empathy: React.FC<SectionProps> = ({ onCTA }) => {
+export const Empathy = memo(({ onCTA }: SectionProps) => {
   return (
     <section className="py-24 container mx-auto rounded-4xl bg-dark-gold-gradient text-white border-y border-gold/20 relative overflow-hidden">
       <div className="container max-w-4xl mx-auto px-4 relative z-10">
@@ -52,4 +53,6 @@ export const Empathy: React.FC<SectionProps> = ({ onCTA }) => {
       </div>
     </section>
   );
-};
+});
+
+Empathy.displayName = "Empathy";

@@ -2,12 +2,13 @@
 
 import { motion } from "framer-motion";
 import { Layers, PhoneCall } from "lucide-react";
+import { memo } from "react";
 
 export interface SectionProps {
   onCTA?: () => void;
 }
 
-export const HeroSection = ({ onCTA }: SectionProps) => {
+export const HeroSection = memo(({ onCTA }: SectionProps) => {
   return (
     <section className="relative min-h-[95vh] flex items-center justify-center overflow-hidden bg-[#FFFDF9]">
       <div className="container max-w-5xl mx-auto px-4 z-10 text-center">
@@ -75,4 +76,6 @@ export const HeroSection = ({ onCTA }: SectionProps) => {
       </div>
     </section>
   );
-};
+});
+
+HeroSection.displayName = "HeroSection";

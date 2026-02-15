@@ -1,4 +1,8 @@
-export const Footer: React.FC = () => (
+"use client";
+
+import { memo } from "react";
+
+export const Footer = memo(() => (
   <footer className="py-20 bg-slate-950 text-white border-t border-gold/10">
     <div className="container max-w-6xl mx-auto px-4">
       <div className="flex flex-col md:flex-row items-center justify-between gap-12 mb-16">
@@ -36,4 +40,6 @@ export const Footer: React.FC = () => (
       </div>
     </div>
   </footer>
-);
+));
+
+Footer.displayName = "Footer";

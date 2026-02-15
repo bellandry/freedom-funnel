@@ -1,6 +1,7 @@
 "use client";
 
 import { incomeData } from "@/constants";
+import { memo } from "react";
 import {
   Line,
   LineChart,
@@ -10,7 +11,7 @@ import {
   YAxis,
 } from "recharts";
 
-export const Problem: React.FC = () => {
+export const Problem = memo(() => {
   return (
     <section className="py-24 bg-[#FFFDF9]">
       <div className="container max-w-6xl mx-auto px-4">
@@ -99,4 +100,6 @@ export const Problem: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+Problem.displayName = "Problem";

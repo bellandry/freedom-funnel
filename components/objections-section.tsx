@@ -1,8 +1,9 @@
 "use client";
 
+import { memo } from "react";
 import { SectionProps } from "./hero-section";
 
-export const Objections: React.FC<SectionProps> = ({ onCTA }) => {
+export const Objections = memo(({ onCTA }: SectionProps) => {
   return (
     <section className="py-12 bg-white">
       <div className="container  mx-auto px-4">
@@ -27,4 +28,6 @@ export const Objections: React.FC<SectionProps> = ({ onCTA }) => {
       </div>
     </section>
   );
-};
+});
+
+Objections.displayName = "Objections";

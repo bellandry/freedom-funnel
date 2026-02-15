@@ -1,8 +1,9 @@
 "use client";
 
 import { process } from "@/constants";
+import { memo } from "react";
 
-export const Process = () => {
+export const Process = memo(() => {
   return (
     <section className="py-24 bg-dark-gold-gradient text-white overflow-hidden">
       <div className="container max-w-4xl mx-auto px-4 text-center">
@@ -37,4 +38,6 @@ export const Process = () => {
       </div>
     </section>
   );
-};
+});
+
+Process.displayName = "Process";

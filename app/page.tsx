@@ -16,20 +16,20 @@ import { Process } from "@/components/process-section";
 import { TargetAudience } from "@/components/target-audience";
 import { Testimonials } from "@/components/testimonials-section";
 import Modal from "@/components/ui/modal";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 
 import { ScrollReveal } from "@/components/ui/scroll-reveal";
 
 export default function Home() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleCTA = () => {
+  const handleCTA = useCallback(() => {
     setIsModalOpen(true);
-  };
+  }, []);
 
-  const handleCloseModal = () => {
+  const handleCloseModal = useCallback(() => {
     setIsModalOpen(false);
-  };
+  }, []);
 
   return (
     <div className="min-h-screen">

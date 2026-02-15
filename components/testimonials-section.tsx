@@ -2,8 +2,9 @@
 
 import { testimonials } from "@/constants";
 import { Star } from "lucide-react";
+import { memo } from "react";
 
-export const Testimonials: React.FC = () => {
+export const Testimonials = memo(() => {
   return (
     <section className="py-24 bg-white overflow-hidden">
       <div className="container max-w-6xl mx-auto px-4">
@@ -48,4 +49,6 @@ export const Testimonials: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+Testimonials.displayName = "Testimonials";

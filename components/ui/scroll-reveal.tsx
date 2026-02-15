@@ -20,19 +20,17 @@ export const ScrollReveal = ({
   distance = 50,
   className = "",
 }: ScrollRevealProps) => {
-  const directions = {
-    up: { y: distance },
-    down: { y: -distance },
-    left: { x: distance },
-    right: { x: -distance },
+  const initial = {
+    opacity: 0,
+    ...(direction === "up" ? { y: distance } : {}),
+    ...(direction === "down" ? { y: -distance } : {}),
+    ...(direction === "left" ? { x: distance } : {}),
+    ...(direction === "right" ? { x: -distance } : {}),
   };
 
   return (
     <motion.div
-      initial={{
-        opacity: 0,
-        ...directions[direction],
-      }}
+      initial={initial}
       whileInView={{
         opacity: 1,
         x: 0,

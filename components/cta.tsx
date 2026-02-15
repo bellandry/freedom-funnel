@@ -1,9 +1,10 @@
 "use client";
 
 import { PhoneCall } from "lucide-react";
+import { memo } from "react";
 import { SectionProps } from "./hero-section";
 
-export const FinalCTA: React.FC<SectionProps> = ({ onCTA }) => {
+export const FinalCTA = memo(({ onCTA }: SectionProps) => {
   return (
     <section className="py-32 bg-black relative overflow-hidden">
       <div className="container max-w-4xl mx-auto px-4 text-center relative z-10">
@@ -28,4 +29,6 @@ export const FinalCTA: React.FC<SectionProps> = ({ onCTA }) => {
       <div className="absolute -bottom-48 left-1/2 -translate-x-1/2 w-full max-w-5xl h-96 bg-gold rounded-full blur-[150px] opacity-10"></div>
     </section>
   );
-};
+});
+
+FinalCTA.displayName = "FinalCTA";

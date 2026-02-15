@@ -1,8 +1,9 @@
 "use client";
 
 import { CheckCircle2, XCircle } from "lucide-react";
+import { memo } from "react";
 
-export const TargetAudience: React.FC = () => {
+export const TargetAudience = memo(() => {
   return (
     <section className="py-24 bg-[#FFFDF9]">
       <div className="container max-w-5xl mx-auto px-4">
@@ -52,4 +53,6 @@ export const TargetAudience: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+TargetAudience.displayName = "TargetAudience";

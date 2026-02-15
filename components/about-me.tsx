@@ -3,9 +3,10 @@
 import { motion } from "framer-motion";
 import { ArrowRight, CheckCircle2, Quote } from "lucide-react";
 import Image from "next/image";
+import { memo } from "react";
 import { SectionProps } from "./hero-section";
 
-export const AboutMe: React.FC<SectionProps> = ({ onCTA }) => {
+export const AboutMe = memo(({ onCTA }: SectionProps) => {
   return (
     <section className="py-24 bg-[#FFFDF9] relative overflow-hidden">
       <div className="container max-w-6xl mx-auto px-4">
@@ -138,4 +139,6 @@ export const AboutMe: React.FC<SectionProps> = ({ onCTA }) => {
       </div>
     </section>
   );
-};
+});
+
+AboutMe.displayName = "AboutMe";

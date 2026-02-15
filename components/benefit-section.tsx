@@ -1,9 +1,9 @@
 "use client";
 
 import { benefits } from "@/constants";
-import React from "react";
+import { memo } from "react";
 
-export const Benefits: React.FC = () => {
+export const Benefits = memo(() => {
   return (
     <section className="py-24 bg-slate-50 border-y border-slate-100">
       <div className="container max-w-5xl mx-auto px-4">
@@ -37,4 +37,6 @@ export const Benefits: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+Benefits.displayName = "Benefits";

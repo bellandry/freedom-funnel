@@ -1,10 +1,9 @@
-"use client";
-
 import { CheckCircle2, ChevronRight } from "lucide-react";
 import Image from "next/image";
+import { memo } from "react";
 import { SectionProps } from "./hero-section";
 
-export const Offer: React.FC<SectionProps> = ({ onCTA }) => {
+export const Offer = memo(({ onCTA }: SectionProps) => {
   return (
     <section className="py-24 bg-white overflow-hidden">
       <div className="container max-w-6xl mx-auto px-4">
@@ -69,4 +68,6 @@ export const Offer: React.FC<SectionProps> = ({ onCTA }) => {
       </div>
     </section>
   );
-};
+});
+
+Offer.displayName = "Offer";

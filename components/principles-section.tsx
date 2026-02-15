@@ -1,7 +1,7 @@
 import { principles } from "@/constants";
-import React from "react";
+import { memo } from "react";
 
-export const Principles: React.FC = () => {
+export const Principles = memo(() => {
   return (
     <section className="py-24 bg-dark-gold-gradient text-white">
       <div className="container max-w-5xl mx-auto px-4">
@@ -37,4 +37,6 @@ export const Principles: React.FC = () => {
       </div>
     </section>
   );
-};
+});
+
+Principles.displayName = "Principles";
